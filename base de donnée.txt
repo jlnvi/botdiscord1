@@ -1,0 +1,38 @@
+-- Créer la base de données
+CREATE DATABASE discord_bot;
+
+-- Utiliser la base de données
+USE discord_bot;
+
+-- Créer la table utilisateur
+CREATE TABLE utilisateur (
+    idUtilisateur NUMBER(4) PRIMARY KEY not null,
+    pseudo VARCHAR(255) NOT NULL,
+    tag VARCHAR(255) not null,
+);
+
+-- Créer la table serveur
+CREATE TABLE serveur (
+    idServeur NUMBER(4) PRIMARY KEY not null,
+    nom_serveur VARCAHR(255) not null,
+);
+
+-- Créer la table salon
+CREATE TABLE salon (
+    idSalon NUMBER(4) PRIMARY KEY not null,
+    nom_serveur VARCHAR(255) not null,
+    FOREIGN KEY (serveur_id) REFERENCES serveur(id) ON DELETE CASCADE
+);
+
+-- Créer la table message
+CREATE TABLE message (
+    idMessage NUMBER(4) PRIMARY KEY not null,
+    message_envoyer VARCHAR(255) not null, 
+    heure DATE not null,
+    FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id) ON DELETE CASCADE,
+    FOREIGN KEY (salon_id) REFERENCES salon(id) ON DELETE CASCADE
+);
+
+commit;
+
+
